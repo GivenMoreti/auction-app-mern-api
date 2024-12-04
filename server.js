@@ -3,6 +3,7 @@ const express = require("express");
 const port = process.env.PORT || 3200;
 const connectToDb = require("./database/db");
 const itemRoutes = require("./routes/item-routes");
+const auctionRoutes = require("./routes/auction-routes");
 
 const app = express();
 
@@ -14,10 +15,8 @@ app.use(express.json());
 //routes
 //my url => http://localhost:3000/api/items/
 app.use("/api/items", itemRoutes);
+app.use("/api/auctions", auctionRoutes);
 
-app.get("/", (req, res) => {
-  res.json("hello world");
-});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
