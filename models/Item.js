@@ -19,7 +19,7 @@ const ItemSchema = new mongoose.Schema({
   },
   isAvailable: {
     type: Boolean,
-    required: true,
+    default: true,
   },
   tags: [],
   dateCreated: {
@@ -29,5 +29,3 @@ const ItemSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Item", ItemSchema);
-
-

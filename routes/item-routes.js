@@ -11,8 +11,10 @@ const router = express.Router();
 
 //get all the items
 
-router.get("/items", getAllItems);
-router.get("/items/:id", getAnItem);
-router.post("/items", createItem);
-router.update("/items/:id", updateItem);
-router.delete("/items/:id", deleteItem);
+router.get("/get", getAllItems);
+router.get("/get/:id", getAnItem);
+router.post("/add", createItem);
+router.put("/update/:id", updateItem);
+router.delete("/delete/:id", deleteItem);
+
+module.exports = router;
