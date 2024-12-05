@@ -92,10 +92,26 @@ const loginUser = async (req, res) => {
       data: accessToken,
     });
 
+    //access token holds username,email,password and role.
     //navigate user to homepage
+  } catch (err) {
+    console.log("There was an error logging in,please try again ", err);
+  }
+};
+
+const getAllUsers = async (req, res) => {
+  try {
+    const user = await User.find({});
+    if (user?.length > 0) {
+      res.status(200).json({
+        success: true,
+        message: "All the users",
+        data: user,
+      });
+    }
   } catch (err) {
     console.log(err);
   }
 };
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser, getAllUsers };
