@@ -7,6 +7,10 @@ const AuctionSchema = new mongoose.Schema({
     ref: "Item",
     required: true,
   },
+  auctionPrice: {
+    type: Number,
+    required: true,
+  },
   startDate: {
     type: Date,
     required: true,
