@@ -28,8 +28,6 @@ const uploadImage = async (req, res) => {
       success: true,
       message: "Image uploaded to mongodb 👍",
     });
-      
-      
   } catch (err) {
     res.status(500).json({
       message: "Something went wrong",
