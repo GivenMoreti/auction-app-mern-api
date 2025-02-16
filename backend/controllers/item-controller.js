@@ -3,8 +3,9 @@ const Item = require("../models/Item");
 const createItem = async (req, res) => {
   try {
     //CREATING A NEW ITEM
-    const newItem = req.body;
-    const newlyCreatedItem = await Item.create(newItem);
+    // const existingItem = await Item.findOne({$and:[""]}); 
+
+    const newlyCreatedItem = await Item.create(req.body);
 
     if (newlyCreatedItem) {
       res.status(201).json({
@@ -13,8 +14,9 @@ const createItem = async (req, res) => {
         data: newlyCreatedItem,
       });
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "Server error creating an item" });
   }
 };
 
@@ -35,16 +37,15 @@ const getAllItems = async (req, res) => {
         message: "Something went wrong",
       });
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "Server error creating an item" });
   }
 };
 
 const getAnItem = async (req, res) => {
   try {
-    //get a single item by id
-    const itemid = req.params.id;
-    const item = await Item.findById(itemid);
+    const item = await Item.findById(req.params.id);
 
     if (item) {
       res.status(200).json({
@@ -65,16 +66,9 @@ const getAnItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   try {
-    const itemId = req.params.id;
-    const updatedItemFormData = req.body;
-
-    const itemToUpdate = await Item.findByIdAndUpdate(
-      itemId,
-      updatedItemFormData,
-      {
-        new: true,
-      }
-    );
+    const itemToUpdate = await Item.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
 
     if (!itemToUpdate) {
       res.status(404).json({
@@ -88,15 +82,15 @@ const updateItem = async (req, res) => {
       success: true,
       data: itemToUpdate,
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "Server error updating an item" });
   }
 };
 
 const deleteItem = async (req, res) => {
   try {
-    const itemId = req.params.id;
-    const item = await Item.findByIdAndDelete(itemId);
+    const item = await Item.findByIdAndDelete(req.params.id);
     if (item) {
       res.status(200).json({
         success: true,
@@ -109,8 +103,9 @@ const deleteItem = async (req, res) => {
         success: false,
       });
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "Server error deleting an item" });
   }
 };
 

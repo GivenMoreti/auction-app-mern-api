@@ -9,10 +9,10 @@ const {
 
 const router = express.Router();
 
-router.get("/get", getAuctions);
-router.get("/get/:id", getAuction);
-router.post("/add", createAuction);
-router.put("/update/:id", updateAuction);
-router.delete("/delete/:id", deleteAuction);
+router.get("/", getAuctions);
+router.get("/:id", getAuction);
+router.post("/", createAuction);
+router.put("/:id", updateAuction);
+router.delete("/:id", deleteAuction);
 
 module.exports = router;
