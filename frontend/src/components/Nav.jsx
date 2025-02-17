@@ -8,9 +8,7 @@ export default function Nav() {
               Auction Huub
           </Link>
           <div className="flex justify-between gap-2">
-            <Link to={"/create-auction"} className="font-bold  text-xl text-white hover:text-gray-200">
-              Create Auction
-              </Link>
+            
 
                <Link to={"/bids"} className="font-bold  text-xl text-white hover:text-gray-200">
               Bids

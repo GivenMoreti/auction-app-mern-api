@@ -6,7 +6,7 @@ import CustomBtn from "./CustomBtn";
 export default function ItemTile({ item }) {
     const navigate = useNavigate();
   return (
-    <div key={ item?.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full sm:w-80 md:w-96 lg:w-1/4 xl:w-1/5 mx-auto">
+    <div key={ item?.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full mx-auto">
       
       {/* Image Section */}
       <div className="w-full h-60 mb-4 overflow-hidden rounded-lg">

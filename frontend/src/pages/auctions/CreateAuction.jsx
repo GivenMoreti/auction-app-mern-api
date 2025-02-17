@@ -34,9 +34,9 @@ export default function CreateAuction() {
     }
   };
 
-  console.log("id",id)
+  // console.log("id",id)
   return (
-    <div className="p-4 max-w-md mx-auto">
+    <div className="p-4 max-w-md mx-auto justify-center flex flex-col">
       <h1 className="text-2xl font-bold text-center mb-6">Create A New Auction</h1>
 
       <div className="space-y-4">
@@ -48,6 +48,7 @@ export default function CreateAuction() {
           helperText="Item"
           label="Item"
           value={id}
+          disabled
           onChange={(e) =>
             setNewAuction({ ...newAuction, item: e.target.value })
           }
