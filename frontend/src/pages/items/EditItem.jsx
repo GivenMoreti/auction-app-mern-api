@@ -37,9 +37,9 @@ export default function EditItem() {
 
   if (!item) return <div className="text-center py-10 text-blue-500 text-xl">Loading item details...</div>;
 
-  console.log(item)
+  // console.log(item)
   return (
-    <div>
+    <div className="p-6">
       <h1 className="text-2xl font-bold text-blue-700 mb-4">Editing item with id {id}</h1>
       
       {/* Image URL Input */}

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useBidStore } from '../store/Bid';
@@ -36,7 +37,7 @@ export default function Modal({ item, onClose }) {
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <input type="text" name="auction" value={id} readOnly className="p-2 border rounded" />
           <input type="number" name="bidPrice" value={bid.bidPrice} onChange={handleChange} placeholder="Bid Price" className="p-2 border rounded" required />
-          <input type="text" name="bidBy" value={bid.bidBy} onChange={handleChange} placeholder="Your Name" className="p-2 border rounded"/>
+          <input type="text" name="bidBy" value={bid.bidBy} onChange={handleChange} placeholder="Your Name" className="p-2 border rounded" readOnly/>
           <div className="flex justify-end space-x-2 mt-4">
             <button type="button" onClick={onClose} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>
             <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit Bid</button>

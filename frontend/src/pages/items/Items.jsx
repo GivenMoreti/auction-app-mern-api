@@ -11,7 +11,9 @@ export default function Bids() {
 
   return (
     <div className="max-w-full p-4 m-4">
-      <h1 className="font-bold text-3xl text-blue-700 p-2 text-start mb-6">Your Items</h1>
+      <h1 className="font-bold text-3xl text-blue-700 p-2 text-start mb-6">
+        Auction your items for value.
+      </h1>
       
       <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 gap-2">
         {items.length > 0 ? (
