@@ -16,6 +16,7 @@ const BidSchema = new mongoose.Schema(
       type: [mongoose.SchemaTypes.ObjectId],
       required: true,
       ref: "User",
+      default: "67518bb78289a835637b9bb0",
     },
   },
   { timestamps: true }

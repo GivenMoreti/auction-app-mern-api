@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuctionStore } from "../../store/Auction";
 import CustomBtn from "../../components/CustomBtn";
+import Modal from "../../components/Modal";
 
 export default function Details() {
   const { id } = useParams();
   const { getAuctionById } = useAuctionStore();
   const [auction, setAuction] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     const fetchAuction = async () => {
@@ -22,6 +24,11 @@ export default function Details() {
 
   if (!auction) return <div className="text-center py-10 text-blue-500 text-xl">Loading auction details...</div>;
 
+  function handleOpenModal() {
+    setOpenModal(true);
+ 
+
+  }
   return (
     <div className="p-8 bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen">
       <h2 className="text-4xl font-bold text-blue-700 text-center mb-8 drop-shadow-md">Auction Details</h2>
@@ -39,9 +46,18 @@ export default function Details() {
             ))}
           </div>
           <p className="text-sm text-gray-500 mb-4">Created on {new Date(auction.dateCreated).toLocaleDateString()}</p>
-          <CustomBtn title="Bid Now" className="bg-blue-600 text-white px-5 py-3 rounded-lg shadow hover:bg-blue-700 transition-colors duration-300" />
+          <CustomBtn title="Bid Now" onClick={()=>handleOpenModal(auction.item.id)} className="bg-blue-600 text-white px-5 py-3 rounded-lg shadow hover:bg-blue-700 transition-colors duration-300" />
         </div>
       </div>
+
+      {/* modal */}
+         {openModal && (
+        <Modal 
+          item={auction.item} 
+          key={auction.item.id} 
+          onClose={() => setOpenModal(false)} 
+        />
+      )}
     </div>
   );
 }

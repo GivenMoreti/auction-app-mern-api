@@ -6,7 +6,7 @@ import CustomBtn from "./CustomBtn";
 export default function ItemTile({ item }) {
     const navigate = useNavigate();
   return (
-    <div key={ item?.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full mx-auto">
+    <div key={ item?._id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 w-full mx-auto">
       
       {/* Image Section */}
       <div className="w-full h-60 mb-4 overflow-hidden rounded-lg">
@@ -44,6 +44,7 @@ export default function ItemTile({ item }) {
         onClick={() => navigate(`/create-auction/${item?._id}`)}
         className="w-full py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors duration-300"
       />
+      <CustomBtn title="Edit" onClick={()=>navigate(`/items/${item?._id}`)}/>
     </div>
   );
 }

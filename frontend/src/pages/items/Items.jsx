@@ -15,7 +15,7 @@ export default function Bids() {
       
       <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 gap-2">
         {items.length > 0 ? (
-          items.map((item) => <ItemTile key={item._id} item={item} />)
+          items.map((item) => <ItemTile key={item?._id} item={item} />)
         ) : (
           <div className="col-span-full text-center p-6 bg-gray-100 rounded-lg shadow-md">
             <h2 className="text-lg font-semibold text-gray-700">No items found</h2>

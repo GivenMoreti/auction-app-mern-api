@@ -1,9 +1,10 @@
 const Item = require("../models/Item");
+const mongoose = require("mongoose");
 
 const createItem = async (req, res) => {
   try {
     //CREATING A NEW ITEM
-    // const existingItem = await Item.findOne({$and:[""]}); 
+    // const existingItem = await Item.findOne({$and:[""]});
 
     const newlyCreatedItem = await Item.create(req.body);
 
@@ -66,25 +67,38 @@ const getAnItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   try {
+    // Validate the id format
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({
+        message: "Invalid item ID format",
+        success: false,
+      });
+    }
+
+    // Attempt to find and update the item
     const itemToUpdate = await Item.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      new: true, // Return the updated document
     });
 
     if (!itemToUpdate) {
-      res.status(404).json({
+      return res.status(404).json({
         message: "Item not found",
         success: false,
       });
     }
 
-    res.status(200).json({
-      message: "updated item",
+    return res.status(200).json({
+      message: "Item updated successfully",
       success: true,
       data: itemToUpdate,
     });
   } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ message: "Server error updating an item" });
+    console.log(error); // Log the full error for debugging
+    return res.status(500).json({
+      message: "Server error while updating item",
+      success: false,
+      error: error.message,
+    });
   }
 };
 

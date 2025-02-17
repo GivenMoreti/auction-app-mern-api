@@ -3,21 +3,24 @@ import { Link } from "react-router-dom";
 
 export default function Nav() {
   return (
-      <div className="bg-blue-500 p-4 flex justify-between">
-          <Link to={"/"} className="font-bold  text-2xl text-white">
-              Auction Huub
-          </Link>
-          <div className="flex justify-between gap-2">
-            
-
-               <Link to={"/bids"} className="font-bold  text-xl text-white hover:text-gray-200">
-              Bids
+    <div className="shadow bg-slate-100 p-4 flex justify-between">
+      <Link to={"/"} className="font-extrabold  text-4xl text-red-700 py-6">
+       ostrich.com
+      </Link>
+      <div className="flex justify-between  gap-6 py-6 pr-10">
+        <Link
+          to={"/bids"}
+          className="font-bold  text-xl text-blue-800 hover:text-gray-600"
+        >
+          bids
         </Link>
-         <Link to={"/items"} className="font-bold  text-xl text-white hover:text-gray-200">
-              Items
-            </Link>
-          </div>
-         
+        <Link
+          to={"/items"}
+          className="font-bold  text-xl text-blue-800 hover:text-gray-600"
+        >
+          items
+        </Link>
+      </div>
     </div>
-  )
+  );
 }

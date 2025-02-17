@@ -27,12 +27,7 @@ export const useBidStore = create((set) => ({
 
   // Create bid
   createBid: async (newBid) => {
-    if (
-      !newBid.item ||
-      !newBid.startDate ||
-      !newBid.BidPrice ||
-      !newBid.endDate
-    ) {
+    if (!newBid.auction || !newBid.bidPrice || !newBid.bidBy) {
       return { success: false, message: "Please fill all fields" };
     }
 

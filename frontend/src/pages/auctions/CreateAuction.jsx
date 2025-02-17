@@ -18,13 +18,20 @@ export default function CreateAuction() {
   const { createAuction } = useAuctionStore();
 
   const handleAddAuction = async () => {
-    if (!newAuction.item || !newAuction.auctionPrice || !newAuction.startDate || !newAuction.endDate) {
+    if (
+      !newAuction.item ||
+      !newAuction.auctionPrice ||
+      !newAuction.startDate ||
+      !newAuction.endDate
+    ) {
       setMessage("All fields are required.");
       return;
     }
 
     setLoading(true);
-    const { success, message: responseMessage } = await createAuction(newAuction);
+    const { success, message: responseMessage } = await createAuction(
+      newAuction
+    );
     setLoading(false);
 
     if (success) {
@@ -37,7 +44,9 @@ export default function CreateAuction() {
   // console.log("id",id)
   return (
     <div className="p-4 max-w-md mx-auto justify-center flex flex-col">
-      <h1 className="text-2xl font-bold text-center mb-6">Create A New Auction</h1>
+      <h1 className="text-2xl font-bold text-center mb-6">
+        Create A New Auction
+      </h1>
 
       <div className="space-y-4">
         {/* Item Field */}
@@ -68,25 +77,27 @@ export default function CreateAuction() {
         />
 
         {/* Start Date Field */}
-        <CustomDatePicker
-          label="Start Date"
-          selected={newAuction.startDate}
-          onChange={(date) =>
-            setNewAuction({ ...newAuction, startDate: date })
-          }
-        />
+        <div className="flex  flex-row gap-4">
+          <CustomDatePicker
+            label="Start Date"
+            selected={newAuction.startDate}
+            onChange={(date) =>
+              setNewAuction({ ...newAuction, startDate: date })
+            }
+          />
 
-        {/* End Date Field */}
-        <CustomDatePicker
-          label="End Date"
-          selected={newAuction.endDate}
-          onChange={(date) =>
-            setNewAuction({ ...newAuction, endDate: date })
-          }
-        />
+          {/* End Date Field */}
+          <CustomDatePicker
+            label="End Date"
+            selected={newAuction.endDate}
+            onChange={(date) => setNewAuction({ ...newAuction, endDate: date })}
+          />
+        </div>
 
         {/* Error or Success Message */}
-        {message && <p className="text-center text-sm text-red-600">{message}</p>}
+        {message && (
+          <p className="text-center text-sm text-red-600">{message}</p>
+        )}
 
         {/* Create Auction Button */}
         <div className="flex justify-center">
