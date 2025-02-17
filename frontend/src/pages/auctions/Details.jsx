@@ -6,72 +6,40 @@ import CustomBtn from "../../components/CustomBtn";
 export default function Details() {
   const { id } = useParams();
   const { getAuctionById } = useAuctionStore();
-  const [auction, setAuction] = useState(null); // State to store auction details
+  const [auction, setAuction] = useState(null);
 
   useEffect(() => {
     const fetchAuction = async () => {
-      const response = await getAuctionById(id); // Await the response from store method
+      const response = await getAuctionById(id);
       if (response.success) {
-        setAuction(response.data); // Set the fetched auction data
+        setAuction(response.data);
       } else {
-        console.error(response.message); // Handle any errors
+        console.error(response.message);
       }
     };
-    fetchAuction(); // Call the async function
+    fetchAuction();
   }, [id, getAuctionById]);
 
-  if (!auction) {
-    return <div>Loading auction details...</div>;
-  }
-  console.log("Auctions", auction);
+  if (!auction) return <div className="text-center py-10 text-blue-500 text-xl">Loading auction details...</div>;
+
   return (
-    <div className="p-6">
-      <h2 className="text-4xl font-bold text-blue-600 text-center mb-6">
-        Details of an Auction
-      </h2>
-      <div className="p-2 shadow m-2 flex justify-around">
-        <div>
-          <img
-            className="rounded"
-            src={auction.item.imgUrl}
-            alt={auction.title}
-            style={{ width: "300px", height: "auto" }}
-          />
-        </div>
-        <div className="">
-          <h1 className="text-2xl font-bold text-blue-800">
-            {auction.item.title}
-          </h1>
-          <p className="font-bold text-red-600 text-xl line-through ">
-            From R{auction.item.price}
-          </p>
-          <p className="font-bold text-blue-800 text-2xl">
-            To R{auction.auctionPrice}
-          </p>
-          <p className="font-bold text-gray-600 mb-2">
-            {auction.item.isAvailable ? "Available now" : "Not Available"}
-          </p>
-          <p className="truncate overflow-ellipsis mb-4">
-            {auction.item.description}
-          </p>
-
-          <span className="flex flex-row space-x-1 px-2 mb-2">
+    <div className="p-8 bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen">
+      <h2 className="text-4xl font-bold text-blue-700 text-center mb-8 drop-shadow-md">Auction Details</h2>
+      <div className="p-4 bg-white shadow-2xl rounded-2xl flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 transition-transform transform hover:scale-105">
+        <img className="rounded-xl w-80 h-auto object-cover shadow-lg" src={auction.item.imgUrl} alt={auction.item.title} />
+        <div className="flex flex-col justify-between p-4">
+          <h1 className="text-3xl font-bold text-blue-800 mb-2">{auction.item.title}</h1>
+          <p className="text-xl font-semibold text-red-500 line-through mb-1">From R{auction.item.price}</p>
+          <p className="text-2xl font-bold text-green-600 mb-2">To R{auction.auctionPrice}</p>
+          <p className="text-lg text-gray-700 mb-2">{auction.item.isAvailable ? "Available now" : "Not Available"}</p>
+          <p className="text-gray-600 mb-4 leading-relaxed">{auction.item.description}</p>
+          <div className="flex flex-wrap gap-2 mb-4">
             {auction.item.tags.map((tag, index) => (
-              <p
-                className=" bg-blue-500 p-2 text-white font-bold rounded-3xl shadow"
-                key={index}
-              >
-                {tag}
-              </p>
+              <span key={index} className="bg-blue-500 text-white text-sm px-3 py-1 rounded-full shadow-md hover:bg-blue-600">{tag}</span>
             ))}
-          </span>
-
-          <p className="text-gray-600 mb-2">
-            Created {new Date(auction.dateCreated).toUTCString()}
-          </p>
-          <div className="mb-4">
-            <CustomBtn title="Bid now" />
           </div>
+          <p className="text-sm text-gray-500 mb-4">Created on {new Date(auction.dateCreated).toLocaleDateString()}</p>
+          <CustomBtn title="Bid Now" className="bg-blue-600 text-white px-5 py-3 rounded-lg shadow hover:bg-blue-700 transition-colors duration-300" />
         </div>
       </div>
     </div>

@@ -6,6 +6,9 @@ import Auctions from './pages/auctions/auctions';
 import Nav from './components/Nav';
 import Details from './pages/auctions/Details';
 import Footer from './components/Footer';
+import Bids from "./pages/bids/Bids";
+import Items from "./pages/items/Items";
+
 
 function App() {
   
@@ -14,9 +17,13 @@ function App() {
       <Router>
         <Nav/>
         <Routes>
-          <Route element={<Auctions />} path='/' />
+           <Route element={<Auctions />} path='/' />
+          <Route element={<Bids />} path='/bids' />
+         
+           <Route element={<Items />} path='/items' />
           <Route element={<Details />} path='/auctions/:id' />
-          <Route element={<CreateAuction/> } path='/create-auction' />
+          
+          <Route element={<CreateAuction/> } path='/create-auction/:id' />
           <Route element={<NotFound/>} path='*' />
         </Routes>
         <Footer/>

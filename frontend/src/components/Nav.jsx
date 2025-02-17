@@ -12,8 +12,11 @@ export default function Nav() {
               Create Auction
               </Link>
 
-               <Link to={"/"} className="font-bold  text-xl text-white hover:text-gray-200">
+               <Link to={"/bids"} className="font-bold  text-xl text-white hover:text-gray-200">
               Bids
+        </Link>
+         <Link to={"/items"} className="font-bold  text-xl text-white hover:text-gray-200">
+              Items
             </Link>
           </div>
          

@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Item = require("./Item");
 const User = require("./User");
 
-
 const AuctionSchema = new mongoose.Schema(
   {
     item: {
@@ -29,7 +28,7 @@ const AuctionSchema = new mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
       required: true,
-      default: [],
+      default: "67512fcb4e0de861150850f3",
     },
   },
   { timestamps: true }

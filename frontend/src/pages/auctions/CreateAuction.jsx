@@ -2,41 +2,98 @@ import { useState } from "react";
 import CustomInput from "../../components/CustomInput";
 import { useAuctionStore } from "../../store/Auction";
 import CustomBtn from "../../components/CustomBtn";
+import CustomDatePicker from "../../components/CustomDatePicker"; // Assuming you have a custom date picker component
+import { useParams } from "react-router-dom";
 
 export default function CreateAuction() {
+  const { id } = useParams();
   const [newAuction, setNewAuction] = useState({
-    item: "",
+    item: id,
     auctionPrice: "",
     startDate: "",
     endDate: "",
   });
-
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
   const { createAuction } = useAuctionStore();
 
   const handleAddAuction = async () => {
-    const { success, message } = await createAuction(newAuction);
+    if (!newAuction.item || !newAuction.auctionPrice || !newAuction.startDate || !newAuction.endDate) {
+      setMessage("All fields are required.");
+      return;
+    }
 
-    console.log({ "success: ": success, "Message: ": message });
+    setLoading(true);
+    const { success, message: responseMessage } = await createAuction(newAuction);
+    setLoading(false);
+
+    if (success) {
+      setMessage("Auction created successfully!");
+    } else {
+      setMessage(responseMessage || "Error creating auction.");
+    }
   };
-  return (
-    <div>
-      <div>
-        <h1>Create A New Auction</h1>
-        <div>
-          {/* model field */}
-          <CustomInput
-            type={"text"}
-            name="item"
-            placeholder="Enter item "
-            helperText={"Item"}
-            label={"Item"}
-            value={newAuction.item}
-            onChange={(e) =>
-              setNewAuction({ ...newAuction, item: e.target.value })
-            }
-          />
 
-          <CustomBtn onClick={handleAddAuction} title="Create"/>
+  console.log("id",id)
+  return (
+    <div className="p-4 max-w-md mx-auto">
+      <h1 className="text-2xl font-bold text-center mb-6">Create A New Auction</h1>
+
+      <div className="space-y-4">
+        {/* Item Field */}
+        <CustomInput
+          type="text"
+          name="item"
+          placeholder="Enter item"
+          helperText="Item"
+          label="Item"
+          value={id}
+          onChange={(e) =>
+            setNewAuction({ ...newAuction, item: e.target.value })
+          }
+        />
+
+        {/* Auction Price Field */}
+        <CustomInput
+          type="number"
+          name="auctionPrice"
+          placeholder="Enter auction price"
+          helperText="Auction Price"
+          label="Auction Price"
+          value={newAuction.auctionPrice}
+          onChange={(e) =>
+            setNewAuction({ ...newAuction, auctionPrice: e.target.value })
+          }
+        />
+
+        {/* Start Date Field */}
+        <CustomDatePicker
+          label="Start Date"
+          selected={newAuction.startDate}
+          onChange={(date) =>
+            setNewAuction({ ...newAuction, startDate: date })
+          }
+        />
+
+        {/* End Date Field */}
+        <CustomDatePicker
+          label="End Date"
+          selected={newAuction.endDate}
+          onChange={(date) =>
+            setNewAuction({ ...newAuction, endDate: date })
+          }
+        />
+
+        {/* Error or Success Message */}
+        {message && <p className="text-center text-sm text-red-600">{message}</p>}
+
+        {/* Create Auction Button */}
+        <div className="flex justify-center">
+          <CustomBtn
+            title={loading ? "Creating..." : "Create Auction"}
+            onClick={handleAddAuction}
+            disabled={loading}
+          />
         </div>
       </div>
     </div>
