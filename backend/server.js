@@ -11,8 +11,12 @@ const homeRoutes = require("./routes/auth/home-routes");
 // const adminRoutes = require("./routes/auth/admin-routes");
 const userRoutes = require("./routes/user-routes");
 const bidRoutes = require("./routes/bid-routes");
-const app = express();
+const paymentsRoutes = require("./routes/payment-routes");
 
+const app = express();
+const Stripe = require("stripe");
+
+const stripe = Stripe("stripesecretkey");
 //connect tp database
 connectToDb();
 //middlewares express.json()
@@ -28,6 +32,7 @@ app.use("/api/bids", bidRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/home", homeRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/payments", paymentsRoutes);
 // app.use("/api/home/admin", adminRoutes);
 
 app.listen(port, () => {

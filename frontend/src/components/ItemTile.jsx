@@ -5,7 +5,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { GiMoneyStack } from "react-icons/gi";
 import { useState } from "react";
-import useItemStore from "../store/Item";
+import {useItemStore} from "../store/Item";
 
 export default function ItemTile({ item }) {
 
