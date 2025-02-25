@@ -8,13 +8,18 @@ const createItem = async (req, res) => {
 
     const newlyCreatedItem = await Item.create(req.body);
 
-    if (newlyCreatedItem) {
-      res.status(201).json({
-        success: true,
-        message: "Item created successfully",
-        data: newlyCreatedItem,
+    if (!newlyCreatedItem) {
+      res.status(400).json({
+        success: false,
+        message: "Item not created",
       });
     }
+
+    res.status(201).json({
+      success: true,
+      message: "Item created successfully",
+      data: newlyCreatedItem,
+    });
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ message: "Server error creating an item" });

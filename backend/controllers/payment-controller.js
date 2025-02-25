@@ -1,11 +1,14 @@
 const stripe = require("stripe");
 
 const createPayment = async (req, res) => {
+  const { amount, currency, token } = req.body;
+
   try {
-    const { amount, currency } = req.body;
     const paymentIntent = await stripe.paymentIntent.create({
       amount,
       currency,
+      payment_method: token,
+      confirm: true,
     });
 
     res.json({ clientSecret: paymentIntent.client_secret });

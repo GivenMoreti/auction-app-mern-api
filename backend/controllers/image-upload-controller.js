@@ -1,40 +1,21 @@
-const uploadToCloudinary = require("../config/cloudinary");
-const Image = require("../models/Image");
+const cloudinary = require("cloudinary").v2;
 
-const uploadImage = async (req, res) => {
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const uploadToCloudinary = async (file) => {
   try {
-    if (!req.file) {
-      res.status(400).json({
-        success: false,
-        message: "File is missing",
-      });
-    }
-
-    //upload to cloudinary
-    const { url, publicId } = await uploadToCloudinary(req.file.path);
-
-    //store image url and public id in a database.
-
-    const newImage = new Image({
-      publicId,
-      url,
-      uploadedBy: req.userInfo.userId,
+    const result = await cloudinary.uploader.upload(file, {
+      folder: "items", // Save images in 'items' folder
     });
-
-    //save image to mongodb
-
-    await newImage.save();
-    res.status(201).json({
-      success: true,
-      message: "Image uploaded to mongodb 👍",
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: "Something went wrong",
-      success: false,
-    });
-    console.log(err);
+    return result.secure_url; // Return the image URL
+  } catch (error) {
+    console.error("Cloudinary Upload Error:", error);
+    return null;
   }
 };
 
-module.exports = uploadImage;
+module.exports = { uploadToCloudinary };

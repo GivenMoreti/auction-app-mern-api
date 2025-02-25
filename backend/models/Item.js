@@ -24,7 +24,11 @@ const ItemSchema = new mongoose.Schema(
       trim: true,
       maxLength: [100, "item description cannot be more than 100 characters"],
     },
-    tags: [String],
+    tags: {
+      type: [String],
+      required: true,
+      default: "",
+    },
   },
   { timestamps: true }
 );

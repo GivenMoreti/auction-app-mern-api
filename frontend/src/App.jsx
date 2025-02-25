@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Bids from "./pages/bids/Bids";
 import Items from "./pages/items/Items";
 import EditItem from './pages/items/EditItem';
+import CreateItem from './pages/items/CreateItem';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route element={<Bids />} path='/bids' />
          
           <Route element={<Items />} path='/items' />
+          <Route element={<CreateItem/> } path='/add-new-item' />
           <Route element={<EditItem />} path='/items/:id' />
           <Route element={<Details />} path='/auctions/:id' />
           
