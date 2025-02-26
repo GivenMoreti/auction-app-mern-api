@@ -13,7 +13,7 @@ export default function ItemTile({ item }) {
   const [message, setMessage] = useState("");
 
   async function handleDelete(id) {
-    console.log(id);
+    // console.log(id);
     const { success,message: responseMessage } = await deleteItem(id);
 
     if (success) {
@@ -64,7 +64,7 @@ export default function ItemTile({ item }) {
             key={index}
             className="bg-blue-500 font-bold text-white text-sm px-4 py-2 rounded-full shadow-md hover:bg-blue-600 transition-colors duration-300"
           >
-            {tag}
+            {tag.split(",")}
           </span>
         ))}
       </div>

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Auction = require("./Auction");
 
 const ItemSchema = new mongoose.Schema(
   {
@@ -27,10 +28,22 @@ const ItemSchema = new mongoose.Schema(
     tags: {
       type: [String],
       required: true,
-      default: "",
+      default: [],
     },
   },
   { timestamps: true }
 );
+ItemSchema.pre("remove", async function (next) {
+  const auctions = await Auction.find({ item: this._id });
 
+  // Delete all related bids first
+  for (let auction of auctions) {
+    await Bid.deleteMany({ auction: auction._id });
+  }
+
+  // Delete all related auctions
+  await Auction.deleteMany({ item: this._id });
+
+  next();
+});
 module.exports = mongoose.model("Item", ItemSchema);

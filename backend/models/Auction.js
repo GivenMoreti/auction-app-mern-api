@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Item = require("./Item");
 const User = require("./User");
+const Bid = require("./Bid");
 
 const AuctionSchema = new mongoose.Schema(
   {
@@ -16,13 +17,18 @@ const AuctionSchema = new mongoose.Schema(
     startDate: {
       type: Date,
       required: true,
-      min: [Date.now, "Start date cannot be in the past"],
       default: Date.now,
     },
     endDate: {
       required: true,
       type: Date,
       min: [Date.now, "End date cannot be in the past"],
+      validate: {
+        validator: function (value) {
+          return value > Date.now();
+        },
+        message: "End date cannot be in the past",
+      },
     },
     postedBy: {
       type: mongoose.SchemaTypes.ObjectId,
@@ -33,5 +39,10 @@ const AuctionSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+AuctionSchema.pre("remove", async function (next) {
+  await Bid.deleteMany({ auction: this._id });
+  next();
+});
 
 module.exports = mongoose.model("Auction", AuctionSchema);
