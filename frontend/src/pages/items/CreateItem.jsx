@@ -19,15 +19,22 @@ export default function CreateItem() {
 
   // Function to upload image to Cloudinary
   const uploadImage = async (file) => {
+    
+    // if file does not exist
+    file = event.target.files[0];
+    if (!file) return;
+
+    // handle the image submission.
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "your_upload_preset");  // Set in Cloudinary
-
+    formData.append("upload_preset", "my_auction_app_img_uploading");  // Set in Cloudinary
+    formData.append("cloud_name","dhjwnnc6y")
     try {
       const res = await axios.post(
         `https://api.cloudinary.com/v1_1/dhjwnnc6y/image/upload`,
         formData
       );
+      console.log(res);
       return res.data.secure_url; // Cloudinary image URL
     } catch (error) {
       console.error("Cloudinary Upload Error:", error);
