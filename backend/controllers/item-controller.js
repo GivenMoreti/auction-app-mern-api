@@ -110,11 +110,16 @@ const updateItem = async (req, res) => {
 const deleteItem = async (req, res) => {
   try {
     const item = await Item.findByIdAndDelete(req.params.id);
-    if (item) {
+
+    if (!item) {
+      res.status(400).json({
+        success: false,
+        message: `Failed to delete item`,
+      });
+
       res.status(200).json({
         success: true,
-        message: `deleted item with id ${itemId}`,
-        data: item,
+        message: `deleted item successfully`,
       });
     } else {
       res.status(404).json({

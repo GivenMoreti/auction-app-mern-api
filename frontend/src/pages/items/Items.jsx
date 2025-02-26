@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import ItemTile from "../../components/ItemTile";
 import { useItemStore } from "../../store/Item";
 import { useEffect } from "react";
+import { IoAdd } from "react-icons/io5";
 
 export default function Bids() {
   const { items, getAllItems } = useItemStore();
@@ -17,7 +18,13 @@ export default function Bids() {
           Auction your items for value.
         </h1>
         {/* add new item button*/}
-        <Link to={"/add-new-item"} className="font-bold text-red-600 bg-slate-200 p-2 m-4 rounded border-red-600 border-2">Add New Item</Link>
+        <Link
+          to="/add-new-item"
+          className="flex items-center justify-center gap-2 px-5 py-3 bg-blue-600 text-white font-bold rounded-xl shadow-md transition-all duration-300 hover:bg-blue-700 hover:scale-105 active:scale-95"
+        >
+          <IoAdd className="text-2xl" />
+          <span>Add New Item</span>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 gap-2">

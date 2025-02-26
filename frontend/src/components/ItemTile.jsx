@@ -12,7 +12,7 @@ export default function ItemTile({ item }) {
   const { deleteItem } = useItemStore();
   const [message, setMessage] = useState("");
 
-  async function handleDelete(id) {
+  async function handleItemDelete(id) {
     // console.log(id);
     const { success,message: responseMessage } = await deleteItem(id);
 
@@ -79,7 +79,7 @@ export default function ItemTile({ item }) {
         title={<FiEdit />}
         onClick={() => navigate(`/items/${item?._id}`)}
       />
-      <CustomBtn title={<RiDeleteBinLine />} onClick={() => handleDelete(item?._id)} />
+      <CustomBtn title={<RiDeleteBinLine />} onClick={() => handleItemDelete(item._id)} />
     </div>
   );
 }
