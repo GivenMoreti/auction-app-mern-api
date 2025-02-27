@@ -17,14 +17,15 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      min: [6, "Password must be 6 or more characters"],
+      // min: [6, "Password must be 6 or more characters"],
     },
     role: {
       type: String,
       enum: ["user", "admin"],
       default: "user",
     },
-  },{ timestamps: true }
+  },
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("User", UserSchema);

@@ -6,10 +6,11 @@ const {
   getBids,
   updateBid,
 } = require("../controllers/bid-controller");
+const verifyToken = require("../middlewares/routesProtector");
 
 const router = express.Router();
 
-router.get("/", getBids);
+router.get("/", verifyToken, getBids);
 router.get("/:id", getBid);
 router.post("/", createBid);
 router.put("/:id", updateBid);
