@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data.user);
     } catch (error) {
       setUser(null);
+       console.error("Checking auth failed", error.response.data);
     }
   };
 

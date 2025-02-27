@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import CustomInput from "../../components/CustomInput";
+import CustomBtn from "../../components/CustomBtn";
 
 export default function Login() {
   const { login } = useContext(AuthContext);
@@ -22,20 +24,19 @@ export default function Login() {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
+    <div className="p-16">
+    <form onSubmit={handleSubmit} >
+      
+      <h1 className=" flex justify-center font-bold text-3xl my-auto">Sign in</h1>
+  
+      <CustomInput label={"Email"} value={email} placeholder={"E.g. foo@email.com"} type={"email"}   onChange={(e) => setEmail(e.target.value)}/>
+      
+      <CustomInput label={"Password"} value={password} placeholder={"Enter your password"} onChange={(e) => setPassword(e.target.value)} type={"password"} />
+     
+      <button type="submit" className="p-2 bg-blue-400 text-white font-bold m-4 mx-auto rounded flex min-w-full justify-center">
+        Login</button>
+      
     </form>
+    </div>
   );
 }

@@ -39,12 +39,47 @@ function App() {
             path="/bids"
           />
 
-          <Route element={<Items />} path="/items" />
-          <Route element={<CreateItem />} path="/add-new-item" />
-          <Route element={<EditItem />} path="/items/:id" />
-          <Route element={<Details />} path="/auctions/:id" />
+          <Route
+            element={
+              <ProtectedRoute>
+                <Items />
+              </ProtectedRoute>
+            }
+            path="/items"
+          />
+          <Route
+            element={
+              <ProtectedRoute>
+                <CreateItem />
+              </ProtectedRoute>
+            }
+            path="/add-new-item"
+          />
+          <Route
+            element={
+              <ProtectedRoute>
+                <EditItem />
+              </ProtectedRoute>
+            }
+            path="/items/:id"
+          />
+          <Route
+            element={
+              <ProtectedRoute>
+                <Details />
+              </ProtectedRoute>
+            }
+            path="/auctions/:id"
+          />
 
-          <Route element={<CreateAuction />} path="/create-auction/:id" />
+          <Route
+            element={
+              <ProtectedRoute>
+                <CreateAuction />
+              </ProtectedRoute>
+            }
+            path="/create-auction/:id"
+          />
           <Route element={<NotFound />} path="*" />
         </Routes>
         <Footer />

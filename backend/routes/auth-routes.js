@@ -10,8 +10,8 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/register", registerUser);
-
 router.post("/login", loginUser);
 router.get("/me", getUser);
 router.post("/logout", logoutUser);
+
 module.exports = router;
