@@ -34,7 +34,7 @@ const AuctionSchema = new mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
       required: true,
-      default: "67512fcb4e0de861150850f3",
+      // default: "67512fcb4e0de861150850f3",
     },
   },
   { timestamps: true }

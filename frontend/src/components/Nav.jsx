@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import Logo from "./Logo/Logo";
 
 export default function Nav() {
   const { user, logout } = useContext(AuthContext);
@@ -8,8 +9,8 @@ export default function Nav() {
   return (
     <nav className="shadow-md bg-white p-4 flex justify-between items-center">
       {/* Logo */}
-      <Link to="/" className="font-extrabold text-3xl text-red-700">
-        Ostrich
+      <Link to="/" className="font-extrabold text-3xl ">
+       <Logo/>
       </Link>
 
       {/* Navigation Links */}

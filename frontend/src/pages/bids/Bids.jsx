@@ -10,7 +10,7 @@ export default function Bids() {
     getAllBids(); 
   }, []);
 
-    console.log(bids)
+    console.log("bids: ",bids)
   return (
       <div className="max-w-full p-2 m-4">
             <h1 className="font-bold text-3xl text-blue-700 p-2 text-start">Your Bids</h1>

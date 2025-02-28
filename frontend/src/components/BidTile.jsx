@@ -41,13 +41,13 @@ export default function BidTile({ item }) {
                     Bid Price: <span className="font-semibold ml-2">R{item.bidPrice}</span>
                   </p>
 
-                  {item.bidBy.map((user) => (
+                  {/* {item.bidBy.map((user) => (
                     <p key={user.id} className="text-gray-600 flex items-center mb-1">
                       <FaUser className="mr-2 text-gray-500" /> 
                       Bid by: {user.username}
                     </p>
-                  ))}
-
+                  ))} */}
+                  <p>{item.bidBy }</p>
                   <p className="text-sm text-gray-500 flex items-center mt-2">
                     <FaClock className="mr-2 text-gray-400" />
                     Updated at: {formattedDate}

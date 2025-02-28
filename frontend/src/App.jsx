@@ -13,6 +13,7 @@ import CreateItem from "./pages/items/CreateItem";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 
 function App() {
   return (
@@ -20,16 +21,10 @@ function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route
-            element={
-              <ProtectedRoute>
-                <Auctions />
-              </ProtectedRoute>
-            }
-            path="/"
-          />
+          <Route element={<Auctions />} path="/" />
           <Route element={<Login />} path="/login" />
-
+           <Route element={<Register />} path="/register" />
+          
           <Route
             element={
               <ProtectedRoute>

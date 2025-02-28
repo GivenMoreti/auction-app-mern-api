@@ -12,7 +12,7 @@ export default function Auction() {
   return (
     <div className="max-w-full p-2 m-4">
       <div>
-        <h1>See all the auctions</h1>
+        <h1 className="font-bold text-center text-blue-600 text-3xl">See all the auctions</h1>
       </div>
       <div className="grid p-1 m-2 gap-2 md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-4">
         {auctions.length > 0 ? (

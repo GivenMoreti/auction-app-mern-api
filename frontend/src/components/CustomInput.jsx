@@ -1,17 +1,17 @@
-/* eslint-disable react/prop-types */
-export default function CustomInput({ label,type,placeholder,value,onChange,name,disabled=false }) {
+export default function CustomInput({ label, value, placeholder, type, onChange, error }) {
   return (
-  
-    <div>
-      <label >{label}</label>
-          <input className="flex flex-col border-2 border-gray-300 w-full p-2 rounded " required  placeholder={placeholder} 
-              value={value}
-        onChange={onChange}
-        name={name}
+    <div className="mb-4">
+      <label className="block text-gray-700 text-sm font-bold mb-2">{label}</label>
+      <input
         type={type}
-        disabled={disabled}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        className={`w-full p-2 border rounded ${
+          error ? "border-red-500" : "border-gray-300"
+        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
       />
-      </div>
-   
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+    </div>
   );
 }

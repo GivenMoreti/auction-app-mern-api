@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data.user);
     } catch (error) {
       setUser(null);
-       console.error("Checking auth failed", error.response.data);
+      console.error("Checking auth failed", error.response?.data || error.message);
     }
   };
 
@@ -21,6 +21,26 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkAuth();
   }, []);
+
+  // Register function
+  const register = async (email, password) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/auth/register",
+        { email, password },
+        { withCredentials: true }
+      );
+
+      setUser(res.data.user); // Store user info in state
+      return { success: true, message: "Registration successful!" };
+    } catch (error) {
+      console.error("Registration failed", error.response?.data || error.message);
+      return {
+        success: false,
+        message: error.response?.data?.message || "Registration failed. Please try again.",
+      };
+    }
+  };
 
   // Login function
   const login = async (email, password) => {
@@ -30,12 +50,15 @@ export const AuthProvider = ({ children }) => {
         { email, password },
         { withCredentials: true }
       );
-      
+
       setUser(res.data.user); // Store user info in state
-      return true;
+      return { success: true, message: "Login successful!" };
     } catch (error) {
-      console.error("Login failed", error.response.data);
-      return false;
+      console.error("Login failed", error.response?.data || error.message);
+      return {
+        success: false,
+        message: error.response?.data?.message || "Login failed. Please try again.",
+      };
     }
   };
 
@@ -44,13 +67,18 @@ export const AuthProvider = ({ children }) => {
     try {
       await axios.post("http://localhost:3000/api/auth/logout", {}, { withCredentials: true });
       setUser(null);
+      return { success: true, message: "Logout successful!" };
     } catch (error) {
-      console.error("Logout failed", error);
+      console.error("Logout failed", error.response?.data || error.message);
+      return {
+        success: false,
+        message: error.response?.data?.message || "Logout failed. Please try again.",
+      };
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, register, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

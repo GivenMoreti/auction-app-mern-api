@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Auction = require("./Auction");
+const User = require("./User");
 
 const BidSchema = new mongoose.Schema(
   {
@@ -13,10 +14,10 @@ const BidSchema = new mongoose.Schema(
       required: true,
     },
     bidBy: {
-      type: [mongoose.SchemaTypes.ObjectId],
+      type: mongoose.SchemaTypes.ObjectId,
       required: true,
       ref: "User",
-      default: "67518bb78289a835637b9bb0",
+      // default: "67518bb78289a835637b9bb0",
     },
   },
   { timestamps: true }
