@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Address = require("./Address");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -23,6 +24,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       enum: ["user", "admin"],
       default: "user",
+    },
+    address: {
+      type: mongoose.SchemaTypes.ObjectId,
+      required: true,
+      ref: "Address",
+      default: "",
     },
   },
   { timestamps: true }
