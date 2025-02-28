@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const Item = require("./Item");
+const Bid = require("./Bid");
 
 const OrderSchema = new mongoose.Schema(
   {
-    item: [mongoose.SchemaTypes.ObjectId],
-    ref: "Item",
+    bid: [mongoose.SchemaTypes.ObjectId],
+    ref: "Bid",
     required: true,
   },
   { timestamps: true }

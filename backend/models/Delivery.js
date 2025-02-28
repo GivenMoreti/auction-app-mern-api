@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Addres = require("./Address");
+const Address = require("./Address");
 const Order = require("./Order");
 
 const DeliverySchema = new mongoose.Schema(
@@ -8,7 +8,7 @@ const DeliverySchema = new mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       required: true,
       ref: "Address",
-      default: "",
+      
     },
     costOfDelivery: {
       type: Number,
