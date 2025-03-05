@@ -38,7 +38,7 @@ export default function Details() {
           <h1 className="text-3xl font-bold text-blue-800 mb-2">{auction.item.title}</h1>
           <p className="text-xl font-semibold text-red-500 line-through mb-1">From R{auction.item.price}</p>
           <p className="text-2xl font-bold text-green-600 mb-2">To R{auction.auctionPrice}</p>
-          <p className="text-lg text-gray-700 mb-2">{auction.item.isAvailable ? "Available now" : "Not Available"}</p>
+          {/* <p className="text-lg text-gray-700 mb-2">{auction.item.isAvailable ? "Available now" : "Not Available"}</p> */}
           <p className="text-gray-600 mb-4 leading-relaxed">{auction.item.description}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {auction.item.tags.map((tag, index) => (

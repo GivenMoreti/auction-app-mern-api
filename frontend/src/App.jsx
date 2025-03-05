@@ -14,6 +14,9 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import Profiles from "./pages/UserProfile/Profiles";
+
 
 function App() {
   return (
@@ -33,6 +36,25 @@ function App() {
             }
             path="/bids"
           />
+        <Route
+            element={
+              <ProtectedRoute>
+                <Profiles />
+              </ProtectedRoute>
+            }
+            path="/profiles"
+          />
+
+
+           <Route
+            element={
+              <ProtectedRoute>
+                <UserProfile />
+              </ProtectedRoute>
+            }
+            path="/profile/:id"
+          />
+
 
           <Route
             element={

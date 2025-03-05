@@ -17,22 +17,28 @@ export default function Nav() {
       <div className="flex items-center gap-6">
         <Link
           to="/bids"
-          className="font-semibold text-lg text-blue-700 hover:text-gray-600 transition"
+          className="text-lg  hover:text-gray-600 transition"
         >
           Bids
         </Link>
         <Link
           to="/items"
-          className="font-semibold text-lg text-blue-700 hover:text-gray-600 transition"
+          className=" text-lg  hover:text-gray-600 transition"
         >
           Items
+        </Link>
+         <Link
+          to="/profiles"
+          className=" text-lg  hover:text-gray-600 transition"
+        >
+         Profiles
         </Link>
 
         {/* User Auth Section */}
         {user ? (
           <div className="flex items-center gap-4">
             <span className="text-gray-700 font-medium">
-               <span className="font-semibold text-blue-600">{user.email}</span>
+               <span className="font-semibold ">{user.email}</span>
             </span>
             <button
               onClick={logout}

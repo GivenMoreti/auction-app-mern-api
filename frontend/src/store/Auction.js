@@ -31,7 +31,8 @@ export const useAuctionStore = create((set) => ({
       !newAuction.item ||
       !newAuction.startDate ||
       !newAuction.auctionPrice ||
-      !newAuction.endDate
+      !newAuction.endDate ||
+      !newAuction.postedBy
     ) {
       return { success: false, message: "Please fill all fields" };
     }

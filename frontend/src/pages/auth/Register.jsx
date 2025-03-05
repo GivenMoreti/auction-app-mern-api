@@ -4,10 +4,13 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Register() {
-  const {register } = useContext(AuthContext);
+  const { register } = useContext(AuthContext);
+  // credentials
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+// credentials end
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +29,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const success = await register(email, password);
+    const success = await register(username,email, password);
     if (success) {
       navigate("/login");
     } else {
@@ -36,6 +39,10 @@ export default function Register() {
 
     // Validate inputs
     const newErrors = {};
+    if (!username) {
+      newErrors.username = "username is required.";
+    } 
+
     if (!email) {
       newErrors.email = "Email is required.";
     } else if (!validateEmail(email)) {
@@ -59,29 +66,30 @@ export default function Register() {
     }
 
     // Simulate API call for registration
-    try {
-      // Replace with your actual API call
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await response.json();
+  //   try {
+  //     // Replace with your actual API call
+  //     const response = await fetch("http://localhost:3000/api/auth/register", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ email, password }),
+  //     });
+  //     const data = await response.json();
 
-      if (response.ok) {
-        setMessage("Registration successful! Redirecting...");
-        // Redirect to login page after a delay
-        setTimeout(() => {
-          window.location.href = "/login";
-        }, 2000);
-      } else {
-        setMessage(data.message || "Registration failed. Please try again.");
-      }
-    } catch (error) {
-      setMessage("An error occurred. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+  //     if (response.ok) {
+  //       setMessage("Registration successful! Redirecting...");
+  //       // Redirect to login page after a delay
+  //       setTimeout(() => {
+  //         window.location.href = "/login";
+  //       }, 2000);
+  //     } else {
+  //       setMessage(data.message || "Registration failed. Please try again.");
+  //     }
+  //   } catch (error) {
+  //     setMessage("An error occurred. Please try again.");
+  //     console.log(error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
   };
 
   return (
@@ -96,6 +104,14 @@ export default function Register() {
 
         {/* Inputs container */}
         <div className="shadow p-6 rounded-xl bg-white">
+          <CustomInput
+            label={"Username"}
+            value={username}
+            placeholder={"E.g. John"}
+            type={"text"}
+            onChange={(e) => setUsername(e.target.value)}
+            error={errors.username}
+          />
           <CustomInput
             label={"Email"}
             value={email}

@@ -42,6 +42,7 @@ app.use("/api/auctions", auctionRoutes);
 app.use("/api/bids", bidRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/home", homeRoutes);
+//new routes
 app.use("/api/payments", paymentsRoutes);
 app.use("/api/addresses", addressRoutes);
 app.use("/api/transactions", transactionRoutes);

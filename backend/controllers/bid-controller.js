@@ -29,8 +29,7 @@ const getBids = async (req, res) => {
         populate: { path: "item" }, // Nested population
       })
       .populate("bidBy");
-    
-    
+
     if (!bids?.length > 0) {
       res.status(404).json({
         message: "No Bids found",

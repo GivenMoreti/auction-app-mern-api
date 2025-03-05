@@ -1,3 +1,18 @@
 Add Address Details
 Add Payment
 Add Delivery Page
+Add Order
+Add Transaction - complete with payment
+/////////////////////////////
+All of this entities belong to a User
+
+
+to get all the payments made by the user
+------------same applies to -----------------
+https://localhost:3000/api/userId/payments/
+https://localhost:3000/api/userId/address/
+https://localhost:3000/api/userId/deliveries/
+https://localhost:3000/api/userId/orders/
+https://localhost:3000/api/userId/transactions/
+
+

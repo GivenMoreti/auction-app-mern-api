@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
     const accessToken = jwt.sign(
       { userId: user._id, email: user.email },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "1d" }
     );
 
     res.cookie("token", accessToken, { httpOnly: true, sameSite: "Strict" });

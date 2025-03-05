@@ -38,7 +38,9 @@ const createAuction = async (req, res) => {
 
 const getAuctions = async (req, res) => {
   try {
-    const auctions = await Auction.find({}).populate("item");
+    const auctions = await Auction.find({})
+      .populate("item")
+      .populate("postedBy");
     if (!auctions?.length > 0) {
       res.status(404).json({
         message: "No Auctions found",
@@ -62,7 +64,9 @@ const getAuctions = async (req, res) => {
 
 const getAuction = async (req, res) => {
   try {
-    const auction = await Auction.findById(req.params.id).populate("item");
+    const auction = await Auction.findById(req.params.id)
+      .populate("item")
+      .populate("postedBy");
 
     if (!auction) {
       res.status(404).json({

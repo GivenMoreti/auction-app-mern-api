@@ -1,27 +1,25 @@
 const mongoose = require("mongoose");
 const User = require("./User");
 const Auction = require("./Auction");
-const Address = require("./Address");
+const Bid = require("./Bid");
 
-const UserProfile = new mongoose.Schema(
+const UserProfileSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "User",
-      default: "",
+      required: true,
     },
     auctions: {
       type: [mongoose.SchemaTypes.ObjectId],
       ref: "Auction",
-      required: true,
     },
     bids: {
       type: [mongoose.SchemaTypes.ObjectId],
       ref: "Bid",
-      required: true,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Profile", UserProfile);
+module.exports = mongoose.model("Profile", UserProfileSchema);

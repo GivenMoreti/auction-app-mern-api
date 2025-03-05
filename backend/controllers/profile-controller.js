@@ -28,8 +28,8 @@ const getProfiles = async (req, res) => {
     const profile = await Profile.find({})
       .populate("user")
       .populate("bids")
-          .populate("auctions");
-      
+      .populate("auctions");
+
     if (!profile?.length > 0) {
       res.status(404).json({
         message: "No Profile found",
@@ -49,32 +49,31 @@ const getProfiles = async (req, res) => {
   }
 };
 
+
 const getProfile = async (req, res) => {
   try {
-    const profile = await Profile.findById(req.params.id)
-      .populate("user")
-      .populate("bids")
-      .populate("auctions");;
+    const userId = req.user.id; // Assuming user ID is available from authentication
+
+    // Find profile by user ID and populate bids and auctions
+    const profile = await Profile.findOne({ user: userId })
+      .populate("auctions") // Populate auctions
+      .populate("bids"); // Populate bids
 
     if (!profile) {
-      res.status(404).json({
-        message: `Profile with id ${req.params.id} does not exist`,
-        success: false,
-      });
+      return res
+        .status(404)
+        .json({ success: false, message: "Profile not found" });
     }
 
-    res.status(200).json({
-      message: "Profile found",
-      success: true,
-      data: Profile,
-    });
+    res.status(200).json({ success: true, data: profile });
   } catch (error) {
-    console.log(error.message);
-    return res
-      .status(500)
-      .json({ message: "Server error retriving an Profile" });
+    console.error("Error fetching user profile:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
+
+
 
 const updateProfile = async (req, res) => {
   try {

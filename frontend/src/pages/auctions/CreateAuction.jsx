@@ -4,25 +4,34 @@ import { useAuctionStore } from "../../store/Auction";
 import CustomBtn from "../../components/CustomBtn";
 import CustomDatePicker from "../../components/CustomDatePicker"; // Assuming you have a custom date picker component
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
+import {useNavigate} from "react-router-dom";
 
 export default function CreateAuction() {
   const { id } = useParams();
+  const {user} = useContext(AuthContext);
+
+  console.log(user);
   const [newAuction, setNewAuction] = useState({
     item: id,
     auctionPrice: "",
     startDate: "",
     endDate: "",
+    postedBy:user._id,
+  
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const { createAuction } = useAuctionStore();
-
+  const navigate = useNavigate();
   const handleAddAuction = async () => {
     if (
       !newAuction.item ||
       !newAuction.auctionPrice ||
       !newAuction.startDate ||
-      !newAuction.endDate
+      !newAuction.endDate ||
+      !newAuction.postedBy
     ) {
       setMessage("All fields are required.");
       return;
@@ -36,6 +45,7 @@ export default function CreateAuction() {
 
     if (success) {
       setMessage("Auction created successfully!");
+      navigate("/");
     } else {
       setMessage(responseMessage || "Error creating auction.");
     }

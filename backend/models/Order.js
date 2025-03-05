@@ -3,9 +3,19 @@ const Bid = require("./Bid");
 
 const OrderSchema = new mongoose.Schema(
   {
-    bid: [mongoose.SchemaTypes.ObjectId],
-    ref: "Bid",
-    required: true,
+    bid: {
+      type: [mongoose.SchemaTypes.ObjectId],
+      ref: "Bid",
+      required: true,
+    },
+    serviceFee: {
+      type: Number,
+      required: true,
+    },
+    total: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );

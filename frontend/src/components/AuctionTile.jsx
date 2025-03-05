@@ -20,7 +20,7 @@ export default function AuctionTile({ item }) {
 
   // Extract data for better readability and default values
   const { imgUrl, title, price } = item?.item || {};
-  const { auctionPrice, startDate, endDate, _id } = item || {};
+  const { auctionPrice, startDate, endDate, _id,postedBy } = item || {};
 
   // delete auction
   async function handleDeleteAuction(id) {
@@ -39,9 +39,10 @@ export default function AuctionTile({ item }) {
       <div className="mb-4">
         <img src={imgUrl} alt={title || 'Auction Item'} className="w-full h-48 object-cover rounded-lg" />
       </div>
-      <h2 className="text-xl font-semibold text-blue-600">{title || 'Auction Item'}</h2>
-      <p className="text-gray-600">Starting Price: R{price || '0.00'}</p>
-      <h3 className="text-red-600 font-bold mt-2">Auctioned at: R{auctionPrice || '0.00'}</h3>
+      <p className="text-gray-500">Posted by @{postedBy.username}</p>
+      <h2 className="text-3xl font-bold">{title || 'Auction Item'}</h2>
+      <p className="text-gray-600 text-xl">Starting Price: R{price || '0.00'}</p>
+      <h3 className="text-red-600 font-bold mt-2 text-2xl">Auctioned: R{auctionPrice || '0.00'}</h3>
 
       <div className="flex justify-between text-gray-500 text-sm mt-4">
         <div className="flex items-center">

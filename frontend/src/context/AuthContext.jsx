@@ -23,11 +23,11 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // Register function
-  const register = async (email, password) => {
+  const register = async (username,email, password) => {
     try {
       const res = await axios.post(
         "http://localhost:3000/api/auth/register",
-        { email, password },
+        {username,email, password },
         { withCredentials: true }
       );
 
